@@ -1,0 +1,62 @@
+.container {
+  display: grid;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 auto;
+}
+
+#table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  letter-spacing: 1px;
+}
+.table_title {
+  background-color: lightblue;
+}
+
+td,
+th {
+  border: 1px solid black;
+  padding: 5px 50px 5px;
+  text-align: center;
+}
+
+.input_container i {
+  position: absolute;
+}
+.input_container {
+  width: 760px;
+  margin-bottom: 10px;
+}
+.icon {
+  padding: 15px;
+  text-align: left;
+  color: gray;
+}
+
+#search {
+  width: 100%;
+  padding: 12px 40px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  border: 2px solid lightgray;
+}
+
+#search:focus {
+  outline: none;
+  border: 2px solid gray;
+}
+
+.selector {
+  width: 300px;
+  height: 30px;
+  margin-bottom: 40px;
+}
+
+
+@media (max-width:780px){
+    .input_container{
+        width: 400px;
+    }
+}
