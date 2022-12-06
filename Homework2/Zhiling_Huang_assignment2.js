@@ -16,10 +16,11 @@ const itemsObject = [
 
 //a. Given the array, implement a function for generating a new array which doubles the quantity and price in each object.
 let double_qp = (itemsObject) => {
-  return itemsObject.map((item) => {
-    return { quantity: item.quantity ** 2, price: item.price ** 2 };
+  return itemsObject.map(({quantity,price}) => {
+    return { quantity: quantity ** 2, price: price ** 2 };
   });
 };
+console.log("1a. ");
 console.log(double_qp(itemsObject));
 
 //b. Given the array, implement a function for generating a new array which contains item quantity > 2 and price > 300 only.
@@ -28,6 +29,7 @@ let filter_pq = (itemsObject) => {
     return item.quantity > 2 && item.price > 300;
   });
 };
+console.log("1b. ");
 console.log(filter_pq(itemsObject));
 
 //c. Given the array, implement a function to calculate the total value of the items.
@@ -37,7 +39,7 @@ let reduce_pq = (itemsObject) => {
     return prev + currItem.price * currItem.quantity;
   }, 0);
 };
-
+console.log("1c. ");
 console.log(reduce_pq(itemsObject));
 
 /*
@@ -60,7 +62,9 @@ let convert_string = (string) => {
     .toLowerCase()
     .trim();
 };
-console.log(convert_string(string));
+console.log("2. ");
+console.log(convert_string(string) === expectedReturnString);
+
 /*
 
 
@@ -107,8 +111,32 @@ let merge_array = (first, second) => {
       map.set(ele_b.uuid, { uuid: ele_b.uuid, role: ele_b.role, name: null });
     }
   });
-  map.forEach((value) => result.push(value));
+  result = Array.from(map.values()); // take all map values become array
   result.sort((a, b) => a.uuid - b.uuid);
   return result;
 };
+
+let merge = (first, second) => {
+  let dict = {};
+
+  [...first, ...second].forEach((ele) => {
+    if (dict[ele.uuid]) {
+      let info = dict[ele.uuid];
+      info.name = ele.name ? ele.name : null;
+      info.role = ele.role ? ele.role : null;
+    } else {
+      dict[ele.uuid] = {
+        uuid: ele.uuid,
+        role: ele.role ? ele.role : null,
+        name: ele.name ? ele.name : null,
+      };
+    }
+  });
+  return Object.values(dict)
+};
+console.log(merge(first,second))
+console.log("3. ");
 console.log(merge_array(first, second));
+
+
+
