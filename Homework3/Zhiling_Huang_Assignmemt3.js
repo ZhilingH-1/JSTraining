@@ -1,4 +1,6 @@
 "use strict";
+
+// create html element (element name ,id , className, test_content)
 const createElement = (element, id, className, text_content) => {
   let new_element = document.createElement(element);
   new_element.id = id;
@@ -6,16 +8,17 @@ const createElement = (element, id, className, text_content) => {
   new_element.textContent = text_content;
   return new_element;
 };
-
-const createList = (list, perent, child ) =>{
-  let parent_ele = createElement(perent,'','','')
-  list.forEach(element =>{
+// create list html element ex: parent: ol child:li  list: array
+const createList = (list, parent, child ) =>{
+  let parent_ele = createElement(parent,'','','')
+  let child_ele = list.map(element =>{
     let child_ele = createElement(child,'','', element)
-    parent_ele.appendChild(child_ele)
+    return child_ele
   })
+  parent_ele.append(...child_ele)
   return parent_ele
 }
-
+// create div container with displayed title : title_content and div id
 const createContainerAndTitle = (title_content,id) =>{
   const new_div = createElement("div", id, "container", "");
   const title = createElement("h2", "", "", title_content);
@@ -66,7 +69,7 @@ const head_info = createList(table_title,'tr','th')
 table_head.appendChild(head_info)
 table.appendChild(table_head)
 table_content.forEach(element =>{
-  const list = [element["Student Name"], element.Age, element.Phone,element.Address]
+  const list = Object.values(element)
   let content = createList(list,'tr','td')
   table.appendChild(content)
 })
@@ -109,11 +112,12 @@ const dropDownList = [
 const dropdown_div = createContainerAndTitle('3. DrowDown','dropdown_div')
 
 const dropdown = createElement('select','citites','selector','')
-dropDownList.forEach(element =>{
+const option_info = dropDownList.map(element =>{
   const option = createElement('option','','',element.content)
   option.value = element.value
-  dropdown.appendChild(option)
+  return option
 })
+dropdown.append(...option_info)
 dropdown_div.appendChild(dropdown)
 body.appendChild(dropdown_div)
 
